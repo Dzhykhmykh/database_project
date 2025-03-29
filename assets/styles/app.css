@@ -74,6 +74,13 @@ body {
     padding: 0.25rem;
 }
 
+form[name='form'] > *,
+#form > div {
+    width: 100%;
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+}
+
 .page-btn {
     display: block;
     text-align: center;
