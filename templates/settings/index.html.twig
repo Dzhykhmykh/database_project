@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Настройки{% endblock %}
+
+{% block body %}
+    <h4>Виды рабочих статусов</h4>
+    {% for status in working_statuses %}
+        <p>{{ status.id }}: {{ status.name }}, {{ status.description }}</p>
+    {% endfor %}
+    <h4>Виды отгулов</h4>
+    {% for days_off_type in days_off_types %}
+        <p>{{ days_off_type.id }}: {{ days_off_type.name }}, {{ days_off_type.description }}</p>
+    {% endfor %}
+{% endblock %}
