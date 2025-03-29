@@ -21,18 +21,18 @@
                                 <td class="table-id">{{ status.id }}</td>
                                 <td>{{ status.name }}</td>
                                 <td>{{ status.description }}</td>
-                                <td><a href="{{ path('app_settings_working_status_edit', {id: status.id}) }}">Редактировать</a></td>
+                                <td><a class="page-btn" href="{{ path('app_settings_working_status_edit', {id: status.id}) }}">Редактировать</a></td>
                                 <td>
                                     <form
                                         method="post"
                                         action="{{ path('app_settings_working_status_delete', {id: status.id}) }}">
-                                        <button type="submit">Удалить</button>
+                                        <button class="page-btn" type="submit">Удалить</button>
                                     </form>
                                 </td>
                             </tr>
                         {% endfor %}
                         <tr>
-                            <td colspan="5"><a href="{{ path('app_settings_working_status_new') }}">Добавить</a></td>
+                            <td colspan="5"><a class="page-btn" href="{{ path('app_settings_working_status_new') }}">Добавить</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -54,18 +54,18 @@
                         <td class="table-id">{{ days_off_type.id }}</td>
                         <td>{{ days_off_type.name }}</td>
                         <td>{{ days_off_type.description }}</td>
-                        <td><a href="{{ path('app_settings_days_off_type_edit', {id: days_off_type.id}) }}">Редактировать</a></td>
+                        <td><a class="page-btn" href="{{ path('app_settings_days_off_type_edit', {id: days_off_type.id}) }}">Редактировать</a></td>
                         <td>
                             <form
                                 method="post"
                                 action="{{ path('app_settings_days_off_type_delete', {id: days_off_type.id}) }}">
-                                <button type="submit">Удалить</button>
+                                <button class="page-btn" type="submit">Удалить</button>
                             </form>
                         </td>
                     </tr>
                 {% endfor %}
                 <tr>
-                    <td colspan="5"><a href="{{ path('app_settings_days_off_type_new') }}">Добавить</a></td>
+                    <td colspan="5"><a class="page-btn" href="{{ path('app_settings_days_off_type_new') }}">Добавить</a></td>
                 </tr>
                 </tbody>
             </table>

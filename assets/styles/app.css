@@ -1,8 +1,10 @@
 html {
     --page-black-color: #050505;
     --page-white-color: #e1e1e1;
-    font-size: 18px;
-    font-family: "Times New Roman", sans-serif
+    --font-size: 18px;
+    --font-family: "Times New Roman", sans-serif;
+    font-size: var(--font-size);
+    font-family: var(--font-family);
 }
 
 body {
@@ -63,11 +65,33 @@ body {
     padding: 1rem;
 }
 
-#settings table, th, td {
+#settings table, #settings th, #settings td {
     border: 1px solid black;
     border-collapse: collapse;
 }
 
-#settings th, td {
+#settings th, #settings td {
     padding: 0.25rem;
 }
+
+.page-btn {
+    display: block;
+    text-align: center;
+    padding: 0.25rem 0.55rem;
+    color: var(--page-black-color);
+    text-decoration: none;
+    background-color: #c6c6c6;
+    border-radius: 0.4rem;
+    border: none;
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+}
+
+.page-btn:hover {
+    background-color: #b1b1b1;
+}
+
+.page-btn:active {
+    background-color: #9c9c9c;
+}
+
