@@ -58,8 +58,48 @@ final class SettingsController extends AbstractController
         ]);
     }
 
+    #[Route('/edit-working-status/{id}', name: 'app_settings_working_status_edit', methods: ['GET', 'POST'])]
+    public function editWorkingStatus(Request $request, WorkingStatus $workingStatus, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this
+            ->createFormBuilder($workingStatus)
+            ->add('name', TextType::class, ['label' => 'Название', 'required' => true])
+            ->add('description', TextType::class, ['label' => 'Описание', 'required' => false])
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($workingStatus);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_settings_index', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('settings/edit_working_status.html.twig', [
+            'form' => $form,
+            'working_status' => $workingStatus,
+        ]);
+    }
+
+    #[Route('/edit-days-off-type/{id}', name: 'app_settings_days_off_type_edit', methods: ['GET', 'POST'])]
+    public function editDaysOffType(Request $request, DaysOffType $daysOffType, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this
+            ->createFormBuilder($daysOffType)
+            ->add('name', TextType::class, ['label' => 'Название', 'required' => true])
+            ->add('description', TextType::class, ['label' => 'Описание', 'required' => false])
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($daysOffType);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_settings_index', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('settings/edit_days_off_type.html.twig', [
+            'form' => $form,
+            'days_off_type' => $daysOffType,
+        ]);
+    }
+
     #[Route('/delete-working-status/{id}', name: 'app_settings_working_status_delete', methods: ['POST'])]
-    public function deleteWorkingStatus(Request $request, WorkingStatus $workingStatus, EntityManagerInterface $entityManager): Response
+    public function deleteWorkingStatus(WorkingStatus $workingStatus, EntityManagerInterface $entityManager): Response
     {
         try {
             $entityManager->remove($workingStatus);
@@ -72,7 +112,7 @@ final class SettingsController extends AbstractController
     }
 
     #[Route('/delete-days-off-type/{id}', name: 'app_settings_days_off_type_delete', methods: ['POST'])]
-    public function deleteDaysOffType(Request $request, DaysOffType $daysOffType, EntityManagerInterface $entityManager): Response
+    public function deleteDaysOffType(DaysOffType $daysOffType, EntityManagerInterface $entityManager): Response
     {
         try {
             $entityManager->remove($daysOffType);

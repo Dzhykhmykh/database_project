@@ -21,7 +21,7 @@
                                 <td class="table-id">{{ status.id }}</td>
                                 <td>{{ status.name }}</td>
                                 <td>{{ status.description }}</td>
-                                <td><a href="#">Редактировать</a></td>
+                                <td><a href="{{ path('app_settings_working_status_edit', {id: status.id}) }}">Редактировать</a></td>
                                 <td>
                                     <form
                                         method="post"
@@ -54,7 +54,7 @@
                         <td class="table-id">{{ days_off_type.id }}</td>
                         <td>{{ days_off_type.name }}</td>
                         <td>{{ days_off_type.description }}</td>
-                        <td><a href="#">Редактировать</a></td>
+                        <td><a href="{{ path('app_settings_days_off_type_edit', {id: days_off_type.id}) }}">Редактировать</a></td>
                         <td>
                             <form
                                 method="post"
