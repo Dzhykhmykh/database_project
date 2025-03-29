@@ -3,12 +3,61 @@
 {% block title %}Настройки{% endblock %}
 
 {% block body %}
-    <h4>Виды рабочих статусов</h4>
-    {% for status in working_statuses %}
-        <p>{{ status.id }}: {{ status.name }}, {{ status.description }}</p>
-    {% endfor %}
-    <h4>Виды отгулов</h4>
-    {% for days_off_type in days_off_types %}
-        <p>{{ days_off_type.id }}: {{ days_off_type.name }}, {{ days_off_type.description }}</p>
-    {% endfor %}
+    <div id="settings">
+        <div class="working-status-table-container">
+            <h4>Виды рабочих статусов</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th colspan="2">Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for status in working_statuses %}
+                            <tr>
+                                <td class="table-id">{{ status.id }}</td>
+                                <td>{{ status.name }}</td>
+                                <td>{{ status.description }}</td>
+                                <td><a href="#">Редактировать</a></td>
+                                <td><a href="#">Удалить</a></td>
+                            </tr>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="5">Добавить</td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+        <div class="working-status-table-container">
+            <h4>Виды отгулов</h4>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th colspan="2">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for days_off_type in days_off_types %}
+                    <tr>
+                        <td class="table-id">{{ days_off_type.id }}</td>
+                        <td>{{ days_off_type.name }}</td>
+                        <td>{{ days_off_type.description }}</td>
+                        <td><a href="#">Редактировать</a></td>
+                        <td><a href="#">Удалить</a></td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="5">Добавить</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

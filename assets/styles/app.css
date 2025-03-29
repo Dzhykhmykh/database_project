@@ -62,3 +62,12 @@ body {
 .page-body {
     padding: 1rem;
 }
+
+#settings table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#settings th, td {
+    padding: 0.25rem;
+}
