@@ -24,10 +24,9 @@
                                 <td><a href="#">Редактировать</a></td>
                                 <td><a href="#">Удалить</a></td>
                             </tr>
-                            </tr>
                         {% endfor %}
                         <tr>
-                            <td colspan="5">Добавить</td>
+                            <td colspan="5"><a href="{{ path('app_settings_working_status_new') }}">Добавить</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -54,7 +53,7 @@
                     </tr>
                 {% endfor %}
                 <tr>
-                    <td colspan="5">Добавить</td>
+                    <td colspan="5"><a href="{{ path('app_settings_days_off_type_new') }}">Добавить</a></td>
                 </tr>
                 </tbody>
             </table>
