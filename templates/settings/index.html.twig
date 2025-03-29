@@ -22,7 +22,13 @@
                                 <td>{{ status.name }}</td>
                                 <td>{{ status.description }}</td>
                                 <td><a href="#">Редактировать</a></td>
-                                <td><a href="#">Удалить</a></td>
+                                <td>
+                                    <form
+                                        method="post"
+                                        action="{{ path('app_settings_working_status_delete', {id: status.id}) }}">
+                                        <button type="submit">Удалить</button>
+                                    </form>
+                                </td>
                             </tr>
                         {% endfor %}
                         <tr>
@@ -49,7 +55,13 @@
                         <td>{{ days_off_type.name }}</td>
                         <td>{{ days_off_type.description }}</td>
                         <td><a href="#">Редактировать</a></td>
-                        <td><a href="#">Удалить</a></td>
+                        <td>
+                            <form
+                                method="post"
+                                action="{{ path('app_settings_days_off_type_delete', {id: days_off_type.id}) }}">
+                                <button type="submit">Удалить</button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
                 <tr>

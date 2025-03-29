@@ -6,6 +6,7 @@ use App\Entity\DaysOffType;
 use App\Entity\WorkingStatus;
 use App\Repository\DaysOffTypeRepository;
 use App\Repository\WorkingStatusRepository;
+use Doctrine\DBAL\Exception\ConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,7 +30,7 @@ final class SettingsController extends AbstractController
 
     #[Route('/new-working-status', name: 'app_settings_working_status_new', methods: ['GET', 'POST'])]
     #[Route('/new-days-off-type', name: 'app_settings_days_off_type_new', methods: ['GET', 'POST'])]
-    public function newWorkingStatus(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         if ($request->attributes->get('_route') === 'app_settings_working_status_new') {
             $entity = new WorkingStatus();
@@ -55,5 +56,31 @@ final class SettingsController extends AbstractController
         return $this->render('settings/new_days_off_type.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    #[Route('/delete-working-status/{id}', name: 'app_settings_working_status_delete', methods: ['POST'])]
+    public function deleteWorkingStatus(Request $request, WorkingStatus $workingStatus, EntityManagerInterface $entityManager): Response
+    {
+        try {
+            $entityManager->remove($workingStatus);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_settings_index', [], Response::HTTP_SEE_OTHER);
+        } catch (ConstraintViolationException) {
+            $this->addFlash('danger', 'Нельзя удалить вид рабочего статуса, потому что он находится указан в других сущностях.');
+            return $this->redirectToRoute('app_settings_index', [], Response::HTTP_SEE_OTHER);
+        }
+    }
+
+    #[Route('/delete-days-off-type/{id}', name: 'app_settings_days_off_type_delete', methods: ['POST'])]
+    public function deleteDaysOffType(Request $request, DaysOffType $daysOffType, EntityManagerInterface $entityManager): Response
+    {
+        try {
+            $entityManager->remove($daysOffType);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_settings_index', [], Response::HTTP_SEE_OTHER);
+        } catch (ConstraintViolationException) {
+            $this->addFlash('danger', 'Нельзя удалить вид рабочего статуса, потому что он находится указан в других сущностях.');
+            return $this->redirectToRoute('app_settings_index', [], Response::HTTP_SEE_OTHER);
+        }
     }
 }
