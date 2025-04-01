@@ -1,5 +1,5 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="page-btn" type="submit">Сохранить</button>
-    <a class="page-btn" href="{{ path('app_settings_index') }}">Отмена</a>
+    <a class="page-btn" href="{{ path(back_route_name, back_route_params) }}">Отмена</a>
 {{ form_end(form) }}

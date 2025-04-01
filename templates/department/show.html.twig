@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Отделы{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_department_index') }}" class="page-btn">Назад</a>
+    <div class="entity-card">
+        <div class="entity-card-body">
+            <h4>{{ department.id }}. {{ department.name }}</h4>
+            <p>{{ department.description }}</p>
+            <p>Бюджет: {{ department.budget }} ₽</p>
+        </div>
+    </div>
+{% endblock %}

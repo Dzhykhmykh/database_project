@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Отделы{% endblock %}
+
+{% block body %}
+    <div class="department-header">
+        <h4>Отделы</h4>
+        <a href="{{ path('app_department_new') }}" class="page-btn">Добавить</a>
+    </div>
+    <div class="cards-table">
+        {% for department in departments %}
+            <div class="entity-card">
+                <div class="entity-card-body">
+                    <h4>{{ department.id }}. {{ department.name }}</h4>
+                    <p>{{ department.description }}</p>
+                    <p>Бюджет: {{ department.budget }} ₽</p>
+                </div>
+                <div class="entity-card-btns">
+                    <a href="{{ path('app_department_show', {id: department.id}) }}" class="icon-btn"><img src="{{ asset('img/link.svg') }}" alt="link"></a>
+                    <a href="{{ path('app_department_edit', {id: department.id}) }}" class="icon-btn"><img src="{{ asset('img/pen.svg') }}" alt="pen"></a>
+                    <a href="{{ path('app_department_delete', {id: department.id}) }}" class="icon-btn"><img src="{{ asset('img/trash-can.svg') }}" alt="trash-can"></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

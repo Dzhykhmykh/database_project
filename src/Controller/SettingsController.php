@@ -51,10 +51,14 @@ final class SettingsController extends AbstractController
         if ($request->attributes->get('_route') === 'app_settings_working_status_new') {
             return $this->render('settings/new_working_status.html.twig', [
                 'form' => $form,
+                'back_route_name' => 'app_settings_index',
+                'back_route_params' => [],
             ]);
         }
         return $this->render('settings/new_days_off_type.html.twig', [
             'form' => $form,
+            'back_route_name' => 'app_settings_index',
+            'back_route_params' => [],
         ]);
     }
 
@@ -75,6 +79,8 @@ final class SettingsController extends AbstractController
         return $this->render('settings/edit_working_status.html.twig', [
             'form' => $form,
             'working_status' => $workingStatus,
+            'back_route_name' => 'app_settings_index',
+            'back_route_params' => [],
         ]);
     }
 
@@ -95,6 +101,8 @@ final class SettingsController extends AbstractController
         return $this->render('settings/edit_days_off_type.html.twig', [
             'form' => $form,
             'days_off_type' => $daysOffType,
+            'back_route_name' => 'app_settings_index',
+            'back_route_params' => [],
         ]);
     }
 
