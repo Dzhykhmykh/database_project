@@ -65,12 +65,12 @@ body {
     align-items: center;
 }
 
-#settings table, #settings th, #settings td {
+table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
 
-#settings th, #settings td {
+th, td {
     padding: 0.25rem;
 }
 
@@ -106,7 +106,7 @@ form[name='form'] > *,
     text-decoration: none;
     color: var(--page-black-color);
     background-color: #c6c6c6;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 0.5rem;
     display: flex;
     flex-wrap: nowrap;
@@ -126,9 +126,10 @@ form[name='form'] > *,
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: 1fr;
     gap: 1rem;
+    width: 100%;
 }
 
-.icon-btn {
+.icon-btn-l {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,16 +139,33 @@ form[name='form'] > *,
     padding: 0.05rem;
 }
 
-.icon-btn > img {
+.icon-btn-l > img {
     width: 1.5rem;
     height: 1.5rem;
 }
 
-.icon-btn:hover {
+.icon-btn-s {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    padding: 0.1rem;
+}
+
+.icon-btn-s > img {
+    width: 1rem;
+    height: 1rem;
+}
+
+.icon-btn-l:hover,
+.icon-btn-s:hover {
     background: rgba(0, 0, 0, 0.1);
 }
 
-.icon-btn:active {
+.icon-btn:active,
+.icon-btn-s:active {
     background: rgba(0, 0, 0, 0.15);
 }
 

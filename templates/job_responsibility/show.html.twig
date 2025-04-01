@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Отделы{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_job_responsibility_index') }}" class="page-btn">Назад</a>
+    <div class="entity-card">
+        <div class="entity-card-body">
+            <h4>{{ job_responsibility.id }}. {{ job_responsibility.name }}</h4>
+            <p>{{ job_responsibility.description }}</p>
+        </div>
+    </div>
+{% endblock %}
