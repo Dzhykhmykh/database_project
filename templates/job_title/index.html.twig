@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Должности{% endblock %}
+
+{% block body %}
+    <div class="department-header">
+        <h4>Должности</h4>
+        <a href="{{ path('app_job_title_new') }}" class="page-btn">Добавить</a>
+    </div>
+    <div class="cards-table">
+        {% for job_title in job_titles %}
+            <div class="entity-card">
+                <div class="entity-card-body">
+                    <h4>{{ job_title.id }}. {{ job_title.name }}</h4>
+                    <p>Зарплата: {{ job_title.salary }} ₽</p>
+                </div>
+                <div class="entity-card-btns">
+                    <a href="{{ path('app_job_title_show', {id: job_title.id}) }}" class="icon-btn"><img src="{{ asset('img/link.svg') }}" alt="link"></a>
+                    <a href="{{ path('app_job_title_edit', {id: job_title.id}) }}" class="icon-btn"><img src="{{ asset('img/pen.svg') }}" alt="pen"></a>
+                    <a href="{{ path('app_job_title_delete', {id: job_title.id}) }}" class="icon-btn"><img src="{{ asset('img/trash-can.svg') }}" alt="trash-can"></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ job_title.name }}. Редактирование{% endblock title %}
+
+{% block body %}
+    <div class="form-container">
+        <h4>Редактирование должности {{ job_title.name }}</h4>
+        {% include('_form.html.twig') %}
+    </div>
+{% endblock %}
