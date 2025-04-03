@@ -73,6 +73,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
 }
 
 table, th, td {
@@ -182,6 +183,31 @@ form[name='form'] > *,
 .entity-card-body > * {
     padding: 0;
     margin: 0;
+}
+
+.table-in-card, .table-in-card td, .table-in-card th {
+    border: none;
+    text-align: left;
+}
+
+.table-in-card tr {
+    border-bottom: #9b9b9b 1px solid;
+}
+
+.entity-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card-with-table-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card-with-table-container h4 {
+    margin: 0.25rem 0;
 }
 
 .department-header {

@@ -67,13 +67,13 @@ final class JobResponsibilityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($jobResponsibility);
             $entityManager->flush();
-            return $this->redirectToRoute('app_job_responsibility_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_job_responsibility_show', ['id' => $jobResponsibility->getId()], Response::HTTP_SEE_OTHER);
         }
         return $this->render('job_responsibility/edit.html.twig', [
             'form' => $form,
             'job_responsibility' => $jobResponsibility,
-            'back_route_name' => 'app_job_responsibility_index',
-            'back_route_params' => [],
+            'back_route_name' => 'app_job_responsibility_show',
+            'back_route_params' => ['id' => $jobResponsibility->getId()],
         ]);
     }
 

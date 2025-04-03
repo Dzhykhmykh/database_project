@@ -3,11 +3,58 @@
 {% block title %}Отделы{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_job_responsibility_index') }}" class="page-btn">Назад</a>
-    <div class="entity-card">
-        <div class="entity-card-body">
-            <h4>{{ job_responsibility.id }}. {{ job_responsibility.name }}</h4>
-            <p>{{ job_responsibility.description }}</p>
+    <div class="entity-btns">
+        <a href="{{ path('app_job_responsibility_index') }}" class="page-btn">В Обязанности</a>
+        <a href="{{ path('app_job_responsibility_edit', {id: job_responsibility.id}) }}" class="page-btn">Редактировать</a>
+        <a href="{{ path('app_job_responsibility_delete', {id: job_responsibility.id}) }}" class="page-btn">Удалить</a>
+    </div>
+    <div class="card-with-table-container">
+        <div class="entity-card">
+            <table class="table-in-card">
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <td>{{ job_responsibility.id }}</td>
+                </tr>
+                <tr>
+                    <th>Название</th>
+                    <td>{{ job_responsibility.name }}</td>
+                </tr>
+                <tr>
+                    <th>Описание</th>
+                    {% if job_responsibility.description %}
+                        <td>{{ job_responsibility.description }}</td>
+                    {% else %}
+                        <td>Пусто</td>
+                    {% endif %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="job-responsibilities-table-container">
+            <h4>Должности, в которых есть эта обязанность</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Зарплата, ₽</th>
+                        <th colspan="1">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for job_title in job_responsibility.jobTitles %}
+                    <tr>
+                        <td class="table-id">{{ job_title.id }}</td>
+                        <td>{{ job_title.name }}</td>
+                        <td>{{ job_title.description }}</td>
+                        <td>{{ job_title.salary }}</td>
+                        <td><a class="page-btn" href="{{ path('app_job_title_show', {id: job_title.id}) }}">Перейти</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}

@@ -3,11 +3,70 @@
 {% block title %}Должности{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_job_title_index') }}" class="page-btn">Назад</a>
-    <div class="entity-card">
-        <div class="entity-card-body">
-            <h4>{{ job_title.id }}. {{ job_title.name }}</h4>
-            <p>Зарплата: {{ job_title.salary }} ₽</p>
+    <div class="entity-btns">
+        <a href="{{ path('app_job_title_index') }}" class="page-btn">В Должности</a>
+        <a href="{{ path('app_job_title_edit', {id: job_title.id}) }}" class="page-btn">Редактировать</a>
+        <a href="{{ path('app_job_title_delete', {id: job_title.id}) }}" class="page-btn">Удалить</a>
+    </div>
+    <div class="card-with-table-container">
+        <div class="entity-card">
+            <table class="table-in-card">
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <td>{{ job_title.id }}</td>
+                </tr>
+                <tr>
+                    <th>Название</th>
+                    <td>{{ job_title.name }}</td>
+                </tr>
+                <tr>
+                    <th>Описание</th>
+                    {% if job_title.description %}
+                        <td>{{ job_title.description }}</td>
+                    {% else %}
+                        <td>Пусто</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Зарплата, ₽</th>
+                    <td>{{ job_title.salary }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="job-responsibilities-table-container">
+            <h4>Рабочие обязанности</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th colspan="2">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for job_responsibility in job_title.jobResponsibilities %}
+                    <tr>
+                        <td class="table-id">{{ job_responsibility.id }}</td>
+                        <td>{{ job_responsibility.name }}</td>
+                        <td>{{ job_responsibility.description }}</td>
+                        <td><a class="page-btn" href="{{ path('app_job_responsibility_show', {id: job_responsibility.id}) }}">Перейти</a></td>
+                        <td>
+                            <form
+                                    method="post"
+                                    action="{{ path('app_job_title_remove_job_responsibility', {jobTitle: job_title.id, jobResponsibility: job_responsibility.id}) }}">
+                                <button class="page-btn" type="submit">Убрать</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="5"><a class="page-btn" href="{{ path('app_job_title_edit_job_responsibilities', {id: job_title.id}) }}">Редактировать</a></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
