@@ -63,6 +63,29 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <h4>Договоры сотрудника</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Начало</th>
+                        <th>Конец</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contract in employee.contracts %}
+                        <tr>
+                            <td>{{ contract.id }}</td>
+                            <td>{{ contract.name }}</td>
+                            <td>{{ contract.dateFromFormatted }}</td>
+                            <td>{{ contract.dateToFormatted }}</td>
+                            <td><a class="page-btn" href="{{ path('app_contract_show', {id: contract.id}) }}">Перейти</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Договор {{ contract.name }}{% endblock %}
+
+{% block body %}
+    <div class="entity-btns">
+        <a href="{{ path('app_contract_index') }}" class="page-btn">В Договоры</a>
+        <a href="{{ path('app_contract_edit', {id: contract.id}) }}" class="page-btn">Редактировать</a>
+        <a href="{{ path('app_contract_delete', {id: contract.id}) }}" class="page-btn">Удалить</a>
+    </div>
+    <div class="entity-card">
+        <div class="entity-card-body">
+            <table class="table-in-card">
+                <tr>
+                    <th>ID</th>
+                    <td>{{ contract.id }}</td>
+                </tr>
+                <tr>
+                    <th>Название</th>
+                    <td>{{ contract.name }}</td>
+                </tr>
+                <tr>
+                    <th>Описание</th>
+                    <td>{{ contract.description }}</td>
+                </tr>
+                <tr>
+                    <th>Сотрудник</th>
+                    <td><a href="{{ path('app_employee_show', {id: contract.employee.id}) }}">{{ contract.employee }}</a></td>
+                </tr>
+                <tr>
+                    <th>Начало</th>
+                    <td>{{ contract.dateFromFormatted }}</td>
+                </tr>
+                <tr>
+                    <th>Конец</th>
+                    <td>{{ contract.dateToFormatted }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}

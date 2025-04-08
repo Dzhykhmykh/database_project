@@ -76,6 +76,10 @@ body {
     gap: 1rem;
 }
 
+table {
+    width: 100%;
+}
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -224,7 +228,7 @@ form[name='form'] > *,
     margin: 0.25rem 0;
 }
 
-.department-header {
+.page-header-with-btns {
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
@@ -233,16 +237,16 @@ form[name='form'] > *,
     margin-bottom: 1rem;
 }
 
-.department-header > h4 {
+.page-header-with-btns > h4 {
     margin: 0;
     padding: 0;
 }
 
-.employee-table tbody tr:hover {
+.links-table tbody tr:hover {
     background: rgba(0, 0, 0, 0.1);
 }
 
-.employee-table tbody tr:active {
+.links-table tbody tr:active {
     background: rgba(0, 0, 0, 0.15);
 }
 
@@ -255,7 +259,7 @@ form[name='form'] > *,
     text-decoration: none;
 }
 
-.employee-table td {
+.links-table td {
     padding: 0;
 }
 

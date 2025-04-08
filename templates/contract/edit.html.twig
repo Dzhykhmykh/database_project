@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+{% block title %}Редактирование договора {{ contract.name }}{% endblock title %}
+
+{% block body %}
+    <h3>Редактирование договора</h3>
+    {% include('_form.html.twig') %}
+{% endblock %}

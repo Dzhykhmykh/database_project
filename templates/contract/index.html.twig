@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Договоры{% endblock %}
+
+{% block body %}
+    <div class="page-header-with-btns">
+        <h4>Договоры</h4>
+        <a href="{{ path('app_contract_new') }}" class="page-btn">Добавить</a>
+    </div>
+    <div class="contract-table-container">
+        <table class="links-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Сотрудник</th>
+                <th>Начало</th>
+                <th>Конец</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for contract in contracts %}
+                <tr>
+                    <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.id }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.name }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.description }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.employee }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.dateFromFormatted }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.dateToFormatted }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
