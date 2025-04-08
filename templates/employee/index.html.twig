@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EmployeeController!{% endblock %}
+{% block title %}Сотрудники{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>D:/Stuff/Studying/DataBase/code/src/Controller/EmployeeController.php</code></li>
-        <li>Your template at <code>D:/Stuff/Studying/DataBase/code/templates/employee/index.html.twig</code></li>
-    </ul>
-</div>
+    <div class="department-header">
+        <h4>Сотрудники</h4>
+        <a href="{{ path('app_employee_new') }}" class="page-btn">Добавить</a>
+    </div>
+    <div class="employee-table-container">
+        <table class="employee-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Отдел</th>
+                    <th>Должность</th>
+                    <th>Статус</th>
+                    <th>Телефон</th>
+                    <th>Email</th>
+                    <th>Заметка</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.id }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.secondName }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.firstName }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.patronymic }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.department.name }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.jobTitle.name }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.workingStatus.name }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.phoneNumber }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.email }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.note }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

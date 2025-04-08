@@ -35,7 +35,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="job-responsibilities-table-container">
+        <div class="job-responsibilities-tables-container">
+            <h4>Сотрудники с этой должностью</h4>
+            {{ include('employee/_min_table.html.twig', {employees: department.employees}) }}
             <h4>Рабочие обязанности</h4>
             <table>
                 <thead>

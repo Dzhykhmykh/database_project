@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DepartmentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DepartmentRepository::class)]
@@ -21,6 +23,17 @@ class Department
 
     #[ORM\Column(nullable: true)]
     private ?int $budget = null;
+
+    /**
+     * @var Collection<int, Employee>
+     */
+    #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'department')]
+    private Collection $employees;
+
+    public function __construct()
+    {
+        $this->employees = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +72,36 @@ class Department
     public function setBudget(?int $budget): static
     {
         $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Employee>
+     */
+    public function getEmployees(): Collection
+    {
+        return $this->employees;
+    }
+
+    public function addEmployee(Employee $employee): static
+    {
+        if (!$this->employees->contains($employee)) {
+            $this->employees->add($employee);
+            $employee->setDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmployee(Employee $employee): static
+    {
+        if ($this->employees->removeElement($employee)) {
+            // set the owning side to null (unless already changed)
+            if ($employee->getDepartment() === $this) {
+                $employee->setDepartment(null);
+            }
+        }
 
         return $this;
     }

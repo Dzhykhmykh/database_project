@@ -123,6 +123,20 @@ form[name='form'] > *,
     flex-wrap: nowrap;
     justify-content: space-between;
     gap: 1rem;
+    height: max-content;
+}
+
+.cards-table .entity-card {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.entity-card.with-btns {
+    flex-direction: row;
+}
+
+.entity-card.without-btns {
+    flex-direction: column;
 }
 
 .entity-card-btns {
@@ -222,4 +236,32 @@ form[name='form'] > *,
 .department-header > h4 {
     margin: 0;
     padding: 0;
+}
+
+.employee-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.employee-table tbody tr:active {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.table-cell-link {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.25rem;
+    color: var(--page-black-color);
+    text-decoration: none;
+}
+
+.employee-table td {
+    padding: 0;
+}
+
+.employee-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-auto-rows: auto;
+    gap: 0.5rem;
 }

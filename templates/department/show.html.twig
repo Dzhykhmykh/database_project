@@ -4,11 +4,17 @@
 
 {% block body %}
     <a href="{{ path('app_department_index') }}" class="page-btn">В Отделы</a>
-    <div class="entity-card">
-        <div class="entity-card-body">
-            <h4>{{ department.id }}. {{ department.name }}</h4>
-            <p>{{ department.description }}</p>
-            <p>Бюджет: {{ department.budget }} ₽</p>
+    <div class="card-with-table-container">
+        <div class="entity-card">
+            <div class="entity-card-body">
+                <h4>{{ department.id }}. {{ department.name }}</h4>
+                <p>{{ department.description }}</p>
+                <p>Бюджет: {{ department.budget }} ₽</p>
+            </div>
+        </div>
+        <div class="employee-table-container">
+            <h4>Сотрудники отдела</h4>
+            {{ include('employee/_min_table.html.twig', {employees: department.employees}) }}
         </div>
     </div>
 {% endblock %}

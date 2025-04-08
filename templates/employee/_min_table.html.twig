@@ -1,0 +1,24 @@
+<table class="employee-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Отдел</th>
+        <th>Статус</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for employee in employees %}
+        <tr>
+            <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.id }}</a></td>
+            <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.secondName }}</a></td>
+            <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.firstName }}</a></td>
+            <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.patronymic }}</a></td>
+            <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.department.name }}</a></td>
+            <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.workingStatus.name }}</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

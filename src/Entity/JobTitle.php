@@ -30,9 +30,16 @@ class JobTitle
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
+    /**
+     * @var Collection<int, Employee>
+     */
+    #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'JobTitle')]
+    private Collection $employees;
+
     public function __construct()
     {
         $this->jobResponsibilities = new ArrayCollection();
+        $this->employees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +108,36 @@ class JobTitle
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Employee>
+     */
+    public function getEmployees(): Collection
+    {
+        return $this->employees;
+    }
+
+    public function addEmployee(Employee $employee): static
+    {
+        if (!$this->employees->contains($employee)) {
+            $this->employees->add($employee);
+            $employee->setJobTitle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmployee(Employee $employee): static
+    {
+        if ($this->employees->removeElement($employee)) {
+            // set the owning side to null (unless already changed)
+            if ($employee->getJobTitle() === $this) {
+                $employee->setJobTitle(null);
+            }
+        }
 
         return $this;
     }
