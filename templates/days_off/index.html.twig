@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Отгулы{% endblock %}
+
+{% block body %}
+    <div class="page-header-with-btns">
+        <h4>Отгулы</h4>
+        <a href="{{ path('app_days_off_new') }}" class="page-btn">Добавить</a>
+    </div>
+    <div class="days-off-table-container">
+        <table class="links-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Тип отгула</th>
+                <th>Сотрудник</th>
+                <th>Название</th>
+                <th>Начало</th>
+                <th>Конец</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for days_off in days_offs %}
+                <tr>
+                    <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.id }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.daysOffType.name }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.employee }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.name }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.dateFromFormatted }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.dateToFormatted }}</a></td>
+                    <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.description }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

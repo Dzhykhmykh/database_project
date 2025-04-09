@@ -51,9 +51,16 @@ class Employee
     #[ORM\OneToMany(targetEntity: Contract::class, mappedBy: 'employee')]
     private Collection $contracts;
 
+    /**
+     * @var Collection<int, DaysOff>
+     */
+    #[ORM\OneToMany(targetEntity: DaysOff::class, mappedBy: 'employee')]
+    private Collection $daysOffs;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
+        $this->daysOffs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -202,5 +209,35 @@ class Employee
     public function __toString() : string
     {
         return $this->getSecondName() . ' ' . $this->getFirstName() . ' ' . $this->getPatronymic();
+    }
+
+    /**
+     * @return Collection<int, DaysOff>
+     */
+    public function getDaysOffs(): Collection
+    {
+        return $this->daysOffs;
+    }
+
+    public function addDaysOff(DaysOff $daysOff): static
+    {
+        if (!$this->daysOffs->contains($daysOff)) {
+            $this->daysOffs->add($daysOff);
+            $daysOff->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDaysOff(DaysOff $daysOff): static
+    {
+        if ($this->daysOffs->removeElement($daysOff)) {
+            // set the owning side to null (unless already changed)
+            if ($daysOff->getEmployee() === $this) {
+                $daysOff->setEmployee(null);
+            }
+        }
+
+        return $this;
     }
 }

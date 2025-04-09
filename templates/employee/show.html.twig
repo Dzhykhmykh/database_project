@@ -29,19 +29,6 @@
             </div>
         </div>
         <div class="employee-tables-container">
-            <h4>Отгулы сотрудника</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Название</th>
-                        <th>Вид отгула</th>
-                        <th>Начало</th>
-                        <th>Конец</th>
-                        <th>Действия</th>
-                    </tr>
-                </thead>
-            </table>
             <h4>Обязанности сотрудника</h4>
             <table>
                 <thead>
@@ -84,6 +71,31 @@
                             <td><a class="page-btn" href="{{ path('app_contract_show', {id: contract.id}) }}">Перейти</a></td>
                         </tr>
                     {% endfor %}
+                </tbody>
+            </table>
+            <h4>Отгулы сотрудника</h4>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Вид отгула</th>
+                    <th>Название</th>
+                    <th>Начало</th>
+                    <th>Конец</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for days_off in employee.daysOffs %}
+                    <tr>
+                        <td>{{ days_off.id }}</td>
+                        <td>{{ days_off.daysOffType.name }}</td>
+                        <td>{{ days_off.name }}</td>
+                        <td>{{ days_off.dateFromFormatted }}</td>
+                        <td>{{ days_off.dateToFormatted }}</td>
+                        <td><a class="page-btn" href="{{ path('app_days_off_show', {id: days_off.id}) }}">Перейти</a></td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>

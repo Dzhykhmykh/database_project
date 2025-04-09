@@ -1,4 +1,5 @@
 {{ form_start(form) }}
+    {{ form_row(form._token) }}
     {{ form_widget(form) }}
     <button class="page-btn" type="submit">Сохранить</button>
     <a class="page-btn" href="{{ path(back_route_name, back_route_params) }}">Отмена</a>

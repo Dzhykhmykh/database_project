@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Отгул {{ days_off.name }}{% endblock %}
+
+{% block body %}
+    <div class="entity-btns">
+        <a href="{{ path('app_days_off_index') }}" class="page-btn">В Отгулы</a>
+        <a href="{{ path('app_days_off_edit', {id: days_off.id}) }}" class="page-btn">Редактировать</a>
+        <a href="{{ path('app_days_off_delete', {id: days_off.id}) }}" class="page-btn">Удалить</a>
+    </div>
+    <div class="entity-card">
+        <div class="entity-card-body">
+            <table class="table-in-card">
+                <tr>
+                    <th>ID</th>
+                    <td>{{ days_off.id }}</td>
+                </tr>
+                <tr>
+                    <th>Вид отгула</th>
+                    <td>{{ days_off.daysOffType.name }}</td>
+                </tr>
+                <tr>
+                    <th>Название</th>
+                    <td>{{ days_off.name }}</td>
+                </tr>
+                <tr>
+                    <th>Описание</th>
+                    <td>{{ days_off.description }}</td>
+                </tr>
+                <tr>
+                    <th>Сотрудник</th>
+                    <td><a href="{{ path('app_employee_show', {id: days_off.employee.id}) }}">{{ days_off.employee }}</a></td>
+                </tr>
+                <tr>
+                    <th>Начало</th>
+                    <td>{{ days_off.dateFromFormatted }}</td>
+                </tr>
+                <tr>
+                    <th>Конец</th>
+                    <td>{{ days_off.dateToFormatted }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
