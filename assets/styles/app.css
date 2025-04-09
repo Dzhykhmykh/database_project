@@ -96,6 +96,11 @@ form[name='form'] > *,
     box-sizing: border-box;
 }
 
+#form > div {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
 .page-btn {
     display: block;
     text-align: center;
@@ -107,6 +112,7 @@ form[name='form'] > *,
     border: none;
     font-size: var(--font-size);
     font-family: var(--font-family);
+    cursor: pointer;
 }
 
 .page-btn:hover {
