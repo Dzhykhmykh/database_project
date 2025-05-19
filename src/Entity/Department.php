@@ -25,14 +25,14 @@ class Department
     private ?int $budget = null;
 
     /**
-     * @var Collection<int, Employee>
+     * @var Collection<int, EmployeePosition>
      */
-    #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'department')]
-    private Collection $employees;
+    #[ORM\OneToMany(targetEntity: EmployeePosition::class, mappedBy: 'department')]
+    private Collection $employeePositions;
 
     public function __construct()
     {
-        $this->employees = new ArrayCollection();
+        $this->employeePositions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,29 +77,29 @@ class Department
     }
 
     /**
-     * @return Collection<int, Employee>
+     * @return Collection<int, EmployeePosition>
      */
-    public function getEmployees(): Collection
+    public function getEmployeePositions(): Collection
     {
-        return $this->employees;
+        return $this->employeePositions;
     }
 
-    public function addEmployee(Employee $employee): static
+    public function addEmployeePosition(EmployeePosition $employeePosition): static
     {
-        if (!$this->employees->contains($employee)) {
-            $this->employees->add($employee);
-            $employee->setDepartment($this);
+        if (!$this->employeePositions->contains($employeePosition)) {
+            $this->employeePositions->add($employeePosition);
+            $employeePosition->setDepartment($this);
         }
 
         return $this;
     }
 
-    public function removeEmployee(Employee $employee): static
+    public function removeEmployeePosition(EmployeePosition $employeePosition): static
     {
-        if ($this->employees->removeElement($employee)) {
+        if ($this->employeePositions->removeElement($employeePosition)) {
             // set the owning side to null (unless already changed)
-            if ($employee->getDepartment() === $this) {
-                $employee->setDepartment(null);
+            if ($employeePosition->getDepartment() === $this) {
+                $employeePosition->setDepartment(null);
             }
         }
 

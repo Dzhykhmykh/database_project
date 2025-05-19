@@ -22,14 +22,14 @@ class WorkingStatus
     private ?string $description = null;
 
     /**
-     * @var Collection<int, Employee>
+     * @var Collection<int, EmployeePosition>
      */
-    #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'workingStatus')]
-    private Collection $employees;
+    #[ORM\OneToMany(targetEntity: EmployeePosition::class, mappedBy: 'workingStatus')]
+    private Collection $employeePositions;
 
     public function __construct()
     {
-        $this->employees = new ArrayCollection();
+        $this->employeePositions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,29 +62,29 @@ class WorkingStatus
     }
 
     /**
-     * @return Collection<int, Employee>
+     * @return Collection<int, EmployeePosition>
      */
-    public function getEmployees(): Collection
+    public function getEmployeePositions(): Collection
     {
-        return $this->employees;
+        return $this->employeePositions;
     }
 
-    public function addEmployee(Employee $employee): static
+    public function addEmployeePosition(EmployeePosition $employeePosition): static
     {
-        if (!$this->employees->contains($employee)) {
-            $this->employees->add($employee);
-            $employee->setWorkingStatus($this);
+        if (!$this->employeePositions->contains($employeePosition)) {
+            $this->employeePositions->add($employeePosition);
+            $employeePosition->setWorkingStatus($this);
         }
 
         return $this;
     }
 
-    public function removeEmployee(Employee $employee): static
+    public function removeEmployeePosition(EmployeePosition $employeePosition): static
     {
-        if ($this->employees->removeElement($employee)) {
+        if ($this->employeePositions->removeElement($employeePosition)) {
             // set the owning side to null (unless already changed)
-            if ($employee->getWorkingStatus() === $this) {
-                $employee->setWorkingStatus(null);
+            if ($employeePosition->getWorkingStatus() === $this) {
+                $employeePosition->setWorkingStatus(null);
             }
         }
 

@@ -6,6 +6,7 @@
         <th>Имя</th>
         <th>Отчество</th>
         <th>Отдел</th>
+        <th>Должность</th>
         <th>Статус</th>
     </tr>
     </thead>
@@ -17,6 +18,7 @@
             <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.firstName }}</a></td>
             <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.patronymic }}</a></td>
             <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.department.name }}</a></td>
+            <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.jobTitle.name }}</a></td>
             <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.workingStatus.name }}</a></td>
         </tr>
     {% endfor %}

@@ -24,18 +24,6 @@ class Employee
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $patronymic = null;
 
-    #[ORM\ManyToOne(inversedBy: 'employees')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?WorkingStatus $workingStatus = null;
-
-    #[ORM\ManyToOne(inversedBy: 'employees')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?JobTitle $JobTitle = null;
-
-    #[ORM\ManyToOne(inversedBy: 'employees')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Department $department = null;
-
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
@@ -57,10 +45,17 @@ class Employee
     #[ORM\OneToMany(targetEntity: DaysOff::class, mappedBy: 'employee')]
     private Collection $daysOffs;
 
+    /**
+     * @var Collection<int, EmployeePosition>
+     */
+    #[ORM\OneToMany(targetEntity: EmployeePosition::class, mappedBy: 'employee')]
+    private Collection $employeePositions;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
         $this->daysOffs = new ArrayCollection();
+        $this->employeePositions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,43 +98,6 @@ class Employee
 
         return $this;
     }
-
-    public function getWorkingStatus(): ?WorkingStatus
-    {
-        return $this->workingStatus;
-    }
-
-    public function setWorkingStatus(?WorkingStatus $workingStatus): static
-    {
-        $this->workingStatus = $workingStatus;
-
-        return $this;
-    }
-
-    public function getJobTitle(): ?JobTitle
-    {
-        return $this->JobTitle;
-    }
-
-    public function setJobTitle(?JobTitle $JobTitle): static
-    {
-        $this->JobTitle = $JobTitle;
-
-        return $this;
-    }
-
-    public function getDepartment(): ?Department
-    {
-        return $this->department;
-    }
-
-    public function setDepartment(?Department $department): static
-    {
-        $this->department = $department;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -235,6 +193,36 @@ class Employee
             // set the owning side to null (unless already changed)
             if ($daysOff->getEmployee() === $this) {
                 $daysOff->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EmployeePosition>
+     */
+    public function getEmployeePositions(): Collection
+    {
+        return $this->employeePositions;
+    }
+
+    public function addEmployeePosition(EmployeePosition $employeePosition): static
+    {
+        if (!$this->employeePositions->contains($employeePosition)) {
+            $this->employeePositions->add($employeePosition);
+            $employeePosition->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmployeePosition(EmployeePosition $employeePosition): static
+    {
+        if ($this->employeePositions->removeElement($employeePosition)) {
+            // set the owning side to null (unless already changed)
+            if ($employeePosition->getEmployee() === $this) {
+                $employeePosition->setEmployee(null);
             }
         }
 

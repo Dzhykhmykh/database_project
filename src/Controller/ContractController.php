@@ -24,7 +24,7 @@ final class ContractController extends AbstractController
     #[Route('/', name: 'app_contract_index')]
     public function index(ContractRepository $contractRepository): Response
     {
-        $contracts = $contractRepository->findAll();
+        $contracts = $contractRepository->findAllSortedById();
         return $this->render('contract/index.html.twig', [
             'contracts' => $contracts,
         ]);

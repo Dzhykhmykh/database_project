@@ -31,15 +31,15 @@ class JobTitle
     private ?string $description = null;
 
     /**
-     * @var Collection<int, Employee>
+     * @var Collection<int, EmployeePosition>
      */
-    #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'JobTitle')]
-    private Collection $employees;
+    #[ORM\OneToMany(targetEntity: EmployeePosition::class, mappedBy: 'jobTitle')]
+    private Collection $employeePositions;
 
     public function __construct()
     {
         $this->jobResponsibilities = new ArrayCollection();
-        $this->employees = new ArrayCollection();
+        $this->employeePositions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,29 +113,29 @@ class JobTitle
     }
 
     /**
-     * @return Collection<int, Employee>
+     * @return Collection<int, EmployeePosition>
      */
-    public function getEmployees(): Collection
+    public function getEmployeePositions(): Collection
     {
-        return $this->employees;
+        return $this->employeePositions;
     }
 
-    public function addEmployee(Employee $employee): static
+    public function addEmployeePosition(EmployeePosition $employeePosition): static
     {
-        if (!$this->employees->contains($employee)) {
-            $this->employees->add($employee);
-            $employee->setJobTitle($this);
+        if (!$this->employeePositions->contains($employeePosition)) {
+            $this->employeePositions->add($employeePosition);
+            $employeePosition->setJobTitle($this);
         }
 
         return $this;
     }
 
-    public function removeEmployee(Employee $employee): static
+    public function removeEmployeePosition(EmployeePosition $employeePosition): static
     {
-        if ($this->employees->removeElement($employee)) {
+        if ($this->employeePositions->removeElement($employeePosition)) {
             // set the owning side to null (unless already changed)
-            if ($employee->getJobTitle() === $this) {
-                $employee->setJobTitle(null);
+            if ($employeePosition->getJobTitle() === $this) {
+                $employeePosition->setJobTitle(null);
             }
         }
 

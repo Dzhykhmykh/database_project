@@ -24,7 +24,7 @@ final class DaysOffController extends AbstractController
     #[Route('/', name: 'app_days_off_index')]
     public function index(DaysOffRepository $daysOffRepository): Response
     {
-        $daysOffs = $daysOffRepository->findAll();
+        $daysOffs = $daysOffRepository->findAllSortedById();
         return $this->render('days_off/index.html.twig', [
             'days_offs' => $daysOffs,
         ]);

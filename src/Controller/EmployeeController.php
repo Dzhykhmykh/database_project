@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Department;
 use App\Entity\Employee;
+use App\Entity\EmployeePosition;
 use App\Entity\JobTitle;
 use App\Entity\WorkingStatus;
 use App\Repository\EmployeeRepository;
@@ -78,10 +79,14 @@ final class EmployeeController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $employee = new Employee();
+        $employeePosition = new EmployeePosition();
         $form = $this->getForm($employee, $entityManager);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($employee);
+            $entityManager->persist($employeePosition);
+            $employeePosition->setEmployee($employee);
+            $employee->addEmployeePosition($employeePosition);
             $entityManager->flush();
             return $this->redirectToRoute('app_employee_index', [], Response::HTTP_SEE_OTHER);
         }
