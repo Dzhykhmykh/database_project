@@ -7,14 +7,14 @@
     <div class="card-with-table-container">
         <div class="entity-card">
             <div class="entity-card-body">
-                <h4>{{ department.id }}. {{ department.name }}</h4>
+                <h4>{{ department.name }}</h4>
                 <p>{{ department.description }}</p>
                 <p>Бюджет: {{ department.budget }} ₽</p>
             </div>
         </div>
         <div class="employee-table-container">
             <h4>Сотрудники отдела</h4>
-            {{ include('employee/_min_table.html.twig', {employees: department.employees}) }}
+            {{ include('employee/_min_table.html.twig', {employeePositions: department.employeePositions}) }}
         </div>
     </div>
 {% endblock %}

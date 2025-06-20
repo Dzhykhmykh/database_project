@@ -11,13 +11,10 @@
         <table class="links-table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Фамилия</th>
                     <th>Имя</th>
                     <th>Отчество</th>
-                    <th>Отдел</th>
-                    <th>Должность</th>
-                    <th>Статус</th>
+                    <th>Должности</th>
                     <th>Телефон</th>
                     <th>Email</th>
                     <th>Заметка</th>
@@ -26,13 +23,15 @@
             <tbody>
                 {% for employee in employees %}
                     <tr>
-                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.id }}</a></td>
                         <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.secondName }}</a></td>
                         <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.firstName }}</a></td>
                         <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.patronymic }}</a></td>
-                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.department.name }}</a></td>
-                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.jobTitle.name }}</a></td>
-                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.workingStatus.name }}</a></td>
+                        <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">
+                                {% for index, employeePosition in employee.getEmployeePositions %}
+                                    {{ employeePosition.jobTitle.name }}
+                                    {%- if index + 1 != employee.getEmployeePositions|length -%}, {%- endif -%}
+                                {% endfor %}
+                        </a></td>
                         <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.phoneNumber }}</a></td>
                         <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.email }}</a></td>
                         <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employee.id}) }}">{{ employee.note }}</a></td>

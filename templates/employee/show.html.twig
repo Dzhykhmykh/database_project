@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Отделы{% endblock %}
+{% block title %}Сотрудник {{ employee.secondName }} {{ employee.firstName }} {{ employee.patronymic }}{% endblock %}
 
 {% block body %}
     <div class="entity-btns">
@@ -14,12 +14,8 @@
                 <h4>{{ employee.secondName }} {{ employee.firstName }} {{ employee.patronymic }}</h4>
             </div>
             <div class="entity-card-body entity-grid-table employee-card">
-                <span class="field-title">Должность</span>
-                <span class="field-value"><a href="{{ path('app_job_title_show', {id: employee.jobTitle.id}) }}">{{ employee.jobTitle.name }}</a></span>
-                <span class="field-title">Отдел</span>
-                <span class="field-value"><a href="{{ path('app_department_show', {id: employee.department.id}) }}">{{ employee.department.name }}</a></span>
-                <span class="field-title">Статус</span>
-                <span class="field-value">{{ employee.workingStatus.name }}</span>
+                <span class="field-title">Суммарная зарплата</span>
+                <span class="field-value">{{ employee.currentSalary }} ₽</span>
                 <span class="field-title">Телефон</span>
                 <span class="field-value">{{ employee.phoneNumber }}</span>
                 <span class="field-title">Email</span>
@@ -40,7 +36,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for job_responsibility in employee.jobTitle.jobResponsibilities %}
+                {% for job_responsibility in employee.currentResponsibilities %}
                     <tr>
                         <td>{{ job_responsibility.id }}</td>
                         <td>{{ job_responsibility.name }}</td>
@@ -73,11 +69,39 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <h4>Занимаемые должности</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Отдел</th>
+                        <th>Должность</th>
+                        <th>Начало</th>
+                        <th>Конец</th>
+                        <th>Зарплата</th>
+                        <th colspan="2">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for employeePosition in employeePositions %}
+                    <tr>
+                        <td>{{ employeePosition.department.name }}</td>
+                        <td>{{ employeePosition.jobTitle.name }}</td>
+                        <td>{{ employeePosition.dateFromFormatted }}</td>
+                        <td>{{ employeePosition.dateToFormatted }}</td>
+                        <td>{{ employeePosition.salary }} ₽</td>
+                        <td><a href="{{ path('app_employee_position_edit', {id: employeePosition.id}) }}" class="page-btn">Редактировать</a></td>
+                        <td><a href="{{ path('app_employee_position_delete', {id: employeePosition.id}) }}" class="page-btn">Удалить</a></td>
+                    </tr>
+                {% endfor %}
+                    <tr>
+                        <td colspan="7"><a href="{{ path('app_employee_position_new', {id: employee.id}) }}" class="page-btn">Добавить</a></td>
+                    </tr>
+                </tbody>
+            </table>
             <h4>Отгулы сотрудника</h4>
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Вид отгула</th>
                     <th>Название</th>
                     <th>Начало</th>
@@ -88,7 +112,6 @@
                 <tbody>
                 {% for days_off in employee.daysOffs %}
                     <tr>
-                        <td>{{ days_off.id }}</td>
                         <td>{{ days_off.daysOffType.name }}</td>
                         <td>{{ days_off.name }}</td>
                         <td>{{ days_off.dateFromFormatted }}</td>

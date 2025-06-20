@@ -33,10 +33,12 @@ final class EmployeeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_employee_show', requirements: ['id' => '\d+'])]
-    public function show(Employee $employee): Response
+    public function show(Employee $employee, EntityManagerInterface $entityManager): Response
     {
+        $employeePositions = $entityManager->getRepository(EmployeePosition::class)->findBy(['employee' => $employee], ['dateFrom' => 'ASC']);
         return $this->render('employee/show.html.twig', [
             'employee' => $employee,
+            'employeePositions' => $employeePositions,
         ]);
     }
 
@@ -47,27 +49,6 @@ final class EmployeeController extends AbstractController
             ->add('secondName', TextType::class, ['label' => 'Фамилия', 'required' => true])
             ->add('firstName', TextType::class, ['label' => 'Имя', 'required' => true])
             ->add('patronymic', TextType::class, ['label' => 'Отчество', 'required' => false])
-            ->add('department', EntityType::class, [
-                'label' => 'Отдел',
-                'required' => true,
-                'class' => Department::class,
-                'choices' => $entityManager->getRepository(Department::class)->findAll(),
-                'choice_label' => 'name',
-            ])
-            ->add('jobTitle', EntityType::class, [
-                'label' => 'Должность',
-                'required' => true,
-                'class' => JobTitle::class,
-                'choices' => $entityManager->getRepository(JobTitle::class)->findAll(),
-                'choice_label' => 'name',
-            ])
-            ->add('workingStatus', EntityType::class, [
-                'label' => 'Статус',
-                'required' => true,
-                'class' => WorkingStatus::class,
-                'choices' => $entityManager->getRepository(WorkingStatus::class)->findAll(),
-                'choice_label' => 'name',
-            ])
             ->add('phoneNumber', TextType::class, ['label' => 'Номер телефона', 'required' => false])
             ->add('email', TextType::class, ['label' => 'Электронная почта', 'required' => false])
             ->add('note', TextareaType::class, ['label' => 'Заметка', 'required' => false])
@@ -79,14 +60,10 @@ final class EmployeeController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $employee = new Employee();
-        $employeePosition = new EmployeePosition();
         $form = $this->getForm($employee, $entityManager);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($employee);
-            $entityManager->persist($employeePosition);
-            $employeePosition->setEmployee($employee);
-            $employee->addEmployeePosition($employeePosition);
             $entityManager->flush();
             return $this->redirectToRoute('app_employee_index', [], Response::HTTP_SEE_OTHER);
         }

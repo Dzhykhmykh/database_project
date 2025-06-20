@@ -11,7 +11,6 @@
         <table class="links-table">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Название</th>
                 <th>Описание</th>
                 <th>Сотрудник</th>
@@ -22,7 +21,6 @@
             <tbody>
             {% for contract in contracts %}
                 <tr>
-                    <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.id }}</a></td>
                     <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.name }}</a></td>
                     <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.description }}</a></td>
                     <td><a class="table-cell-link" href="{{ path('app_contract_show', {id: contract.id}) }}">{{ contract.employee }}</a></td>

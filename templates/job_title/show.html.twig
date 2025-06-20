@@ -13,10 +13,6 @@
             <table class="table-in-card">
                 <tbody>
                 <tr>
-                    <th>ID</th>
-                    <td>{{ job_title.id }}</td>
-                </tr>
-                <tr>
                     <th>Название</th>
                     <td>{{ job_title.name }}</td>
                 </tr>
@@ -37,12 +33,11 @@
         </div>
         <div class="job-responsibilities-tables-container">
             <h4>Сотрудники с этой должностью</h4>
-            {{ include('employee/_min_table.html.twig', {employees: job_title.employees}) }}
+            {{ include('employee/_min_table.html.twig', {employeePositions: job_title.employeePositions}) }}
             <h4>Рабочие обязанности</h4>
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Название</th>
                         <th>Описание</th>
                         <th colspan="2">Действия</th>
@@ -51,7 +46,6 @@
                 <tbody>
                 {% for job_responsibility in job_title.jobResponsibilities %}
                     <tr>
-                        <td class="table-id">{{ job_responsibility.id }}</td>
                         <td>{{ job_responsibility.name }}</td>
                         <td>{{ job_responsibility.description }}</td>
                         <td><a class="page-btn" href="{{ path('app_job_responsibility_show', {id: job_responsibility.id}) }}">Перейти</a></td>

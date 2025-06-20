@@ -31,10 +31,10 @@ class EmployeePosition
     private ?WorkingStatus $workingStatus = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $startDate = null;
+    private ?\DateTimeInterface $dateFrom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $endTime = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateTo = null;
 
     #[ORM\Column]
     private ?int $salary = null;
@@ -92,26 +92,39 @@ class EmployeePosition
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getDateFrom(): ?\DateTimeInterface
     {
-        return $this->startDate;
+        return $this->dateFrom;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): static
+    public function getDateFromFormatted(): ?string
     {
-        $this->startDate = $startDate;
+        return $this->getDateFrom()->format('d.m.Y');
+    }
+
+    public function setDateFrom(?\DateTimeInterface $dateFrom): static
+    {
+        $this->dateFrom = $dateFrom;
 
         return $this;
     }
 
-    public function getEndTime(): ?\DateTimeInterface
+    public function getDateTo(): ?\DateTimeInterface
     {
-        return $this->endTime;
+        return $this->dateTo;
     }
 
-    public function setEndTime(\DateTimeInterface $endTime): static
+    public function getDateToFormatted(): ?string
     {
-        $this->endTime = $endTime;
+        if ($this->getDateTo() instanceof \DateTimeInterface) {
+            return $this->getDateTo()->format('d.m.Y');
+        }
+        return null;
+    }
+
+    public function setDateTo(?\DateTimeInterface $dateTo): static
+    {
+        $this->dateTo = $dateTo;
 
         return $this;
     }

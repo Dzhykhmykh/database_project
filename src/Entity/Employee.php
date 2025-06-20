@@ -228,4 +228,34 @@ class Employee
 
         return $this;
     }
+
+    public function getCurrentSalary(): int
+    {
+        $salary = 0;
+        foreach ($this->employeePositions as $employeePosition) {
+            if ($employeePosition->getDateTo() === null ||$employeePosition->getDateTo() > new \DateTime()) {
+                $salary += $employeePosition->getSalary();
+            }
+        }
+
+        return $salary;
+    }
+
+    public function getCurrentResponsibilities(): ArrayCollection
+    {
+        $responsibilities = new ArrayCollection();
+        foreach ($this->employeePositions as $employeePosition) {
+            foreach ($employeePosition->getJobTitle()->getJobResponsibilities() as $responsibility) {
+                if (
+                    $employeePosition->getDateTo() === null ||
+                    $employeePosition->getDateTo() > new \DateTime() &&
+                    !$responsibilities->contains($responsibility)
+                ) {
+                    $responsibilities->add($responsibility);
+                }
+            }
+        }
+
+        return $responsibilities;
+    }
 }

@@ -13,10 +13,6 @@
             <table class="table-in-card">
                 <tbody>
                 <tr>
-                    <th>ID</th>
-                    <td>{{ job_responsibility.id }}</td>
-                </tr>
-                <tr>
                     <th>Название</th>
                     <td>{{ job_responsibility.name }}</td>
                 </tr>
@@ -36,7 +32,6 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Название</th>
                         <th>Описание</th>
                         <th>Зарплата, ₽</th>
@@ -46,7 +41,6 @@
                 <tbody>
                 {% for job_title in job_responsibility.jobTitles %}
                     <tr>
-                        <td class="table-id">{{ job_title.id }}</td>
                         <td>{{ job_title.name }}</td>
                         <td>{{ job_title.description }}</td>
                         <td>{{ job_title.salary }}</td>

@@ -9,7 +9,6 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Название</th>
                             <th>Описание</th>
                             <th colspan="2">Действия</th>
@@ -18,7 +17,6 @@
                     <tbody>
                         {% for status in working_statuses %}
                             <tr>
-                                <td class="table-id">{{ status.id }}</td>
                                 <td>{{ status.name }}</td>
                                 <td>{{ status.description }}</td>
                                 <td><a class="page-btn" href="{{ path('app_settings_working_status_edit', {id: status.id}) }}">Редактировать</a></td>
@@ -42,7 +40,6 @@
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Название</th>
                     <th>Описание</th>
                     <th colspan="2">Действия</th>
@@ -51,7 +48,6 @@
                 <tbody>
                 {% for days_off_type in days_off_types %}
                     <tr>
-                        <td class="table-id">{{ days_off_type.id }}</td>
                         <td>{{ days_off_type.name }}</td>
                         <td>{{ days_off_type.description }}</td>
                         <td><a class="page-btn" href="{{ path('app_settings_days_off_type_edit', {id: days_off_type.id}) }}">Редактировать</a></td>
