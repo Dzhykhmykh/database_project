@@ -11,7 +11,6 @@
         <table class="links-table">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Тип отгула</th>
                 <th>Сотрудник</th>
                 <th>Название</th>
@@ -23,7 +22,6 @@
             <tbody>
             {% for days_off in days_offs %}
                 <tr>
-                    <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.id }}</a></td>
                     <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.daysOffType.name }}</a></td>
                     <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.employee }}</a></td>
                     <td><a class="table-cell-link" href="{{ path('app_days_off_show', {id: days_off.id}) }}">{{ days_off.name }}</a></td>

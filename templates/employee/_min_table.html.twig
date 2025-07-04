@@ -1,7 +1,6 @@
 <table class="links-table">
     <thead>
     <tr>
-        <th>ID</th>
         <th>Фамилия</th>
         <th>Имя</th>
         <th>Отчество</th>
@@ -13,7 +12,6 @@
     <tbody>
     {% for employeePosition in employeePositions %}
         <tr>
-            <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employeePosition.employee.id}) }}">{{ employeePosition.employee.id }}</a></td>
             <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employeePosition.employee.id}) }}">{{ employeePosition.employee.secondName }}</a></td>
             <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employeePosition.employee.id}) }}">{{ employeePosition.employee.firstName }}</a></td>
             <td><a class="table-cell-link" href="{{ path('app_employee_show', {id: employeePosition.employee.id}) }}">{{ employeePosition.employee.patronymic }}</a></td>

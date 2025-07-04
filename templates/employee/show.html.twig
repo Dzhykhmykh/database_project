@@ -29,7 +29,6 @@
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Название</th>
                     <th>Описание</th>
                     <th>Действия</th>
@@ -38,7 +37,6 @@
                 <tbody>
                 {% for job_responsibility in employee.currentResponsibilities %}
                     <tr>
-                        <td>{{ job_responsibility.id }}</td>
                         <td>{{ job_responsibility.name }}</td>
                         <td>{{ job_responsibility.description }}</td>
                         <td><a class="page-btn" href="{{ path('app_job_responsibility_show', {id: job_responsibility.id}) }}">Перейти</a></td>
@@ -50,7 +48,6 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Название</th>
                         <th>Начало</th>
                         <th>Конец</th>
@@ -60,7 +57,6 @@
                 <tbody>
                     {% for contract in employee.contracts %}
                         <tr>
-                            <td>{{ contract.id }}</td>
                             <td>{{ contract.name }}</td>
                             <td>{{ contract.dateFromFormatted }}</td>
                             <td>{{ contract.dateToFormatted }}</td>
